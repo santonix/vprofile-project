@@ -1,5 +1,6 @@
 #!/bin/bash
-yum install java-1.8.0-openjdk.x86_64 wget -y   
+sudo dnf install fontconfig java-17-openjdk
+yum install wget -y   
 mkdir -p /opt/nexus/   
 mkdir -p /tmp/nexus/                           
 cd /tmp/nexus/
