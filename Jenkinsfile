@@ -49,6 +49,8 @@ pipeline {
         stage('static code analysis') {
             environment {
                 scannerHome = tool "${SONARSCANNER}"
+                 SONAR_METADATA_FILE_PATH = "${env.WORKSPACE}/.scannerwork/report-task.txt"
+    }
 
             }
             steps {
@@ -62,6 +64,7 @@ pipeline {
                     -Dsonar.sources=src/main/java \
                     -Dsonar.tests=src/test/java \
                     -Dsonar.java.test.binaries=target/test-classes \
+                    -Dsonar.scanner.metadataFilePath=${SONAR_METADATA_FILE_PATH}
                     -Dsonar.java.binaries=target/classes/com/visualpathit/account/controller/ \
                     -Dsonar.junit.reportsPath=target/surefire-reports/  \
                     -Dsonar.jacoco.reportsPath=target/jacoco.exec \
