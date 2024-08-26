@@ -17,7 +17,7 @@ pipeline {
         NEXUS_LOGIN = 'nexus-cred'
         SONARSERVER = 'sonar-server'
         SONARSCANNER = 'sonar-scanner'
-
+        SONAR_METADATA_FILE_PATH = "${env.WORKSPACE}/.scannerwork/report-task.txt"
     }
 
     stages {
@@ -47,34 +47,23 @@ pipeline {
         }
 
         stage('static code analysis') {
-            environment {
-                scannerHome = tool "${SONARSCANNER}"
-                SONAR_METADATA_FILE_PATH = "${env.WORKSPACE}/.scannerwork/report-task.txt"
-    }
-
-            }
             steps {
                 withSonarQubeEnv("${SONARSERVER}") {
-                    sh '''${scannerHome}/bin/sonar-scanner 
+                    sh '''${SONARSCANNER}/bin/sonar-scanner \
                     -Dsonar.projectKey=vprofile \
-
-                    
                     -Dsonar.projectName=vprofile-repo \
                     -Dsonar.projectVersion=1.0 \
                     -Dsonar.sources=src/main/java \
                     -Dsonar.tests=src/test/java \
+                    -Dsonar.java.binaries=target/classes \
                     -Dsonar.java.test.binaries=target/test-classes \
-                    -Dsonar.scanner.metadataFilePath=${SONAR_METADATA_FILE_PATH}
-                    -Dsonar.java.binaries=target/classes/com/visualpathit/account/controller/ \
-                    -Dsonar.junit.reportsPath=target/surefire-reports/  \
+                    -Dsonar.scanner.metadataFilePath=${SONAR_METADATA_FILE_PATH} \
+                    -Dsonar.junit.reportsPath=target/surefire-reports/ \
                     -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                     -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml \
-                    -Dsonar.sourceEncoding=UTF-8 '''
-                    
-                
+                    -Dsonar.sourceEncoding=UTF-8'''
                 }
             }
-
         }
     }
 }
