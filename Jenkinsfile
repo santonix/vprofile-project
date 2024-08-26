@@ -16,12 +16,13 @@ pipeline {
         NEXUS_GRP_REPO = 'vpro-maven-group'
         NEXUS_LOGIN = 'nexus-cred'
         SONARSERVER = 'sonar-server'
-        SONARSCANNER = 'sonar-scanner'
+        // Assuming SonarScanner is installed at /opt/sonar-scanner
+        SONARSCANNER_HOME = "/opt/sonar-scanner"
         SONAR_METADATA_FILE_PATH = "${env.WORKSPACE}/.scannerwork/report-task.txt"
     }
 
     stages {
-        stage('build'){
+        stage('Build') {
             steps {
                 sh 'mvn -s settings.xml -DskipTests install'
             }
@@ -33,23 +34,22 @@ pipeline {
             }
         }
 
-        stage('test') {
+        stage('Test') {
             steps {
                 sh 'mvn -s settings.xml test'
             }
-
         }
 
-        stage('checkstyle analysis') {
+        stage('Checkstyle Analysis') {
             steps {
-                sh 'mvn  -s settings.xml  checkstyle:checkstyle'
+                sh 'mvn -s settings.xml checkstyle:checkstyle'
             }
         }
 
-        stage('static code analysis') {
+        stage('Static Code Analysis') {
             steps {
                 withSonarQubeEnv("${SONARSERVER}") {
-                    sh '''${SONARSCANNER}/bin/sonar-scanner \
+                    sh '''${SONARSCANNER_HOME}/bin/sonar-scanner \
                     -Dsonar.projectKey=vprofile \
                     -Dsonar.projectName=vprofile-repo \
                     -Dsonar.projectVersion=1.0 \
