@@ -49,7 +49,7 @@ pipeline {
         stage('static code analysis') {
             environment {
                 scannerHome = tool "${SONARSCANNER}"
-                 SONAR_METADATA_FILE_PATH = "${env.WORKSPACE}/.scannerwork/report-task.txt"
+                SONAR_METADATA_FILE_PATH = "${env.WORKSPACE}/.scannerwork/report-task.txt"
     }
 
             }
