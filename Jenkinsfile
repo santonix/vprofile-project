@@ -10,7 +10,7 @@ pipeline [
         NEXUS_USER = 'admin'
         NEXUS_PASS = 'walter'
         RELEASE_REPO = 'vprofile-release'
-        CENTRAL-REPO = 'vpro-maven-central'
+        CENTRAL_REPO = 'vpro-maven-central'
         NEXUSIP = '172.31.31.161'
         NEXUSPORT = '8081'
         NEXUS_GRP_REPO = 'vpro-maven-group'
