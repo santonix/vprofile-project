@@ -52,7 +52,7 @@ pipeline {
 
             }
             steps {
-                withSonarQubeEnv("${SONARSERVER}") 
+                withSonarQubeEnv("${SONARSERVER}") {
                     sh '''${scannerHome}/bin/sonar-scanner -dsonar.projectKey=vprofile \
 
                     
@@ -64,7 +64,7 @@ pipeline {
                     -Dsonar.jacoco.reportsPath=target/jacoco.exec \
                     -Dsonar.java.checkstyle.reportPaths=target/checkstyle-result.xml'''
                 
-
+                }
             }
 
         }
