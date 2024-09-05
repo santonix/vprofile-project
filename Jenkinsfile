@@ -15,6 +15,7 @@ pipeline {
 	    NEXUS_REPOGRP_ID    = "vprofile-grp-repo"
         NEXUS_CREDENTIAL_ID = "nexuslogin"
         ARTVERSION = "${env.BUILD_ID}"
+        NEXUSIP = "34.45.93.112"
     }
 
     stages {
@@ -84,8 +85,6 @@ pipeline {
             }
         }
 
-          
-        
 
         stage("UploadArtifact"){
             steps{
