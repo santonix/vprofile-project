@@ -17,6 +17,9 @@ pipeline {
         ARTVERSION = "${env.BUILD_ID}"
         NEXUSIP = "34.45.93.112"
         NEXUSPORT = "8081" 
+        NEXUS_LOGIN = "nexuslogin"
+        RELEASE_REPO = "vprofile-release"
+
     }
 
     stages {
