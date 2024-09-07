@@ -19,6 +19,7 @@ pipeline {
         NEXUSPORT = "8081" 
         NEXUS_LOGIN = "nexuslogin"
         RELEASE_REPO = "vprofile-release"
+        COLOR_MAP = '{"success": "green", "failure": "red"}' // Define COLOR_MAP in the environment
 
     }
 
