@@ -1,4 +1,10 @@
 
+
+def COLOR_MAP = [
+    'SUCCESS': 'good', 
+    'FAILURE': 'danger',
+]
+
 pipeline {
     agent any
     tools {
@@ -116,29 +122,10 @@ pipeline {
 
     post {
         always {
-            echo 'Sending Slack Notifications...'
-            script {
-                def colorMap = readJSON text: COLOR_MAP
-                def resultColor = colorMap[currentBuild.currentResult.toUpperCase()]
-                slackSend channel: '#jenkinscicd',
-                    color: resultColor,
-                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \nMore info at: ${env.BUILD_URL}"
-            }
-        }
-
-        success {
-            script {
-                echo "Waiting for approval to release the artifacts..."
-                
-                // Manual approval step before releasing artifacts
-                timeout(time: 1, unit: 'HOURS') { // Adjust the timeout as needed
-                    input(message: 'Do you approve the release of the CI artifacts or Docker image?', ok: 'Approve Release')
-                }
-                
-                // If approved, proceed with releasing the artifacts
-                echo "Approval received. Releasing the CI artifacts or Docker image..."
-                // Add artifact upload, Docker image push, or other release steps here
-            }
+            echo 'Slack Notifications.'
+            slackSend channel: '#jenkinscicd',
+                color: COLOR_MAP[currentBuild.currentResult],
+                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
         }
     }
 }
