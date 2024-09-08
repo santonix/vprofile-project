@@ -1,9 +1,10 @@
 
 
-def COLOR_MAP = [
-    'SUCCESS': 'good', 
-    'FAILURE': 'danger',
-]
+def colorMap = [
+    SUCCESS: 'good',
+    FAILURE: 'danger',
+    UNSTABLE: 'warning'
+]    
 
 pipeline {
     agent any
@@ -123,9 +124,15 @@ pipeline {
     post {
         always {
             echo 'Slack Notifications.'
-            slackSend channel: '#jenkinscicd',
-                color: COLOR_MAP[currentBuild.currentResult],
-                message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \n More info at: ${env.BUILD_URL}"
+            
+            script {
+                def color = colorMap[currentBuild.currentResult.toUpperCase()] ?: 'warning'
+                
+                slackSend channel: '#jenkinscicd',
+                    color: color,
+                    message: "*${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER} \nMore info at: ${env.BUILD_URL}",
+                    tokenCredentialId: SLACK_CREDENTIALS_ID
+            }
         }
     }
 }
