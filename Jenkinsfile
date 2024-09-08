@@ -27,6 +27,7 @@ pipeline {
         NEXUS_LOGIN = "nexuslogin"
         RELEASE_REPO = "vprofile-release"
         COLOR_MAP = '{"success": "green", "failure": "red"}' // Define COLOR_MAP in the environment
+        SLACK_CREDENTIALS_ID = "slack-token"
 
     }
 
