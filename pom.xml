@@ -309,8 +309,8 @@
     </build>
     <repositories>
       <repository>
-        <id>bonnyzone-maven-central-store</id>
-        <name>bonnyzone-maven-central-store</name>
+        <id>bonnyzone-vprofile-maven-repo</id>
+        <name>bonnyzone-vprofile-maven-repo</name>
     <url>https://bonnyzone-163447728448.d.codeartifact.us-east-2.amazonaws.com/maven/maven-central-store/</url>
       </repository>
     </repositories>

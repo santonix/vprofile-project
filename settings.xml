@@ -4,20 +4,20 @@
   xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
   <servers>
         <server>
-            <id>bonnyzone-maven-central-store</id>
+            <id>bonnyzone-vprofile-maven-repo</id>
             <username>aws</username>
             <password>${env.CODEARTIFACT_AUTH_TOKEN}</password>
         </server>
     </servers>
 <profiles>
   <profile>
-    <id>bonnyzone-maven-central-store</id>
+    <id>bonnyzone-vprofile-maven-repo</id>
     <activation>
       <activeByDefault>true</activeByDefault>
     </activation>  
     <repositories>
       <repository>
-        <id>bonnyzone-maven-central-store</id>
+        <id>bonnyzone-vprofile-maven-repo</id>
     <url>https://bonnyzone-163447728448.d.codeartifact.us-east-2.amazonaws.com/maven/maven-central-store/</url>
       </repository>
 
@@ -29,8 +29,8 @@
     </activeProfiles>
 <mirrors>
   <mirror>
-    <id>bonnyzone-maven-central-store</id>
-    <name>bonnyzone-maven-central-store</name>
+    <id>bonnyzone-vprofile-maven-repo</id>
+    <name>bonnyzone-vprofile-maven-repo</name>
     <url>https://bonnyzone-163447728448.d.codeartifact.us-east-2.amazonaws.com/maven/maven-central-store/</url>
     <mirrorOf>*</mirrorOf>
   </mirror>
